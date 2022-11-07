@@ -29,7 +29,7 @@ const useHashFragment = (offset = 0, trigger = true) => {
       window.removeEventListener('hashchange', scrollToHashElement);
       router.events.off('hashChangeStart', scrollToHashElement);
     };
-  }, [trigger]);
+  }, [trigger, offset, router]);
 };
 
 export {useHashFragment};

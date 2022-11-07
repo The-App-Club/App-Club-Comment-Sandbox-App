@@ -1,9 +1,9 @@
 import {formatRelativeTime} from '@/utils/dateUtil';
-import {cx} from '@emotion/css';
+import {css, cx} from '@emotion/css';
 import {Comment} from 'domains/comment';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {
   MdFavoriteBorder,
   MdOutlineFavorite,
@@ -17,6 +17,7 @@ import CommentForm from '@/components/CommentForm';
 
 const Comment = ({item}: {item: Comment}) => {
   const router = useRouter();
+  const [focusedComment, setFocusedComment] = useState(false);
 
   const replyCount = useMemo(() => {
     if (!item) {
@@ -42,13 +43,24 @@ const Comment = ({item}: {item: Comment}) => {
     });
   };
 
+  useEffect(() => {
+    const {hash} = window.location;
+    console.log(hash, item.commentId);
+    if (hash === `#${item.commentId}`) {
+      setFocusedComment(true);
+    } else {
+      setFocusedComment(false);
+    }
+  }, [item]);
+
   return (
     <div
       id={`${item.commentId}`}
       className={cx(
         'relative w-full min-h-[8rem] border-2 rounded-xl px-2 py-2',
         `border-2 border-gray-200 dark:border-slate-500`,
-        `mb-2`
+        `mb-2`,
+        focusedComment && `border-blue-600`
       )}
     >
       <div className="w-full flex items-start gap-2 min-h-[3rem]">
