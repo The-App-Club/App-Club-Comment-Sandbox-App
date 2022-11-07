@@ -4,6 +4,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "export": "next export",
+    "serve": "serve out",
     "format": "prettier --write \"{,!(node_modules|dist|build)/**/}*.*\""
   },
   "dependencies": {
