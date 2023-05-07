@@ -1,0 +1,58 @@
+{
+  "plugins": ["unused-imports", "tailwindcss"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint-config-prettier",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ],
+  "rules": {
+    "unused-imports/no-unused-imports": "error",
+    "sort-imports": [
+      "error",
+      {
+        "allowSeparatedGroups": true,
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "object",
+          "type",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "**\\.scss",
+            "group": "index",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react", "next/**"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": false }
+      }
+    ],
+    "import/first": "error",
+    "import/newline-after-import": "error"
+  }
+}
